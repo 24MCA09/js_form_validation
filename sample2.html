@@ -1,0 +1,167 @@
+<html>
+<head>
+    <title>WPL Online Exam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question p {
+            margin: 0;
+            font-weight: bold;
+        }
+        .options {
+            margin-top: 10px;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e8f4e8;
+            border: 1px solid #4caf50;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Online Exam</h1>
+        <div id="result" class="result" style="display: none;"></div>
+        <br>
+        <form id="examForm" onsubmit="return calculateScore()">
+            <div class="question">
+                <p>1. Which type of JavaScript language is ___?</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="a"> Object-Oriented</label>
+                    <label><input type="radio" name="q1" value="b"> Object-Based</label>
+                    <label><input type="radio" name="q1" value="c"> Assembly-language</label>
+                    <label><input type="radio" name="q1" value="d"> High-level</label>
+                </div>
+                <span id="errorQ1" class="error"></span>
+            </div>
+            
+            <div class="question">
+                <p>2. Which one of the following also known as Conditional Expression</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="a">Alternative to if-else</label>
+                    <label><input type="radio" name="q2" value="b">immediate if</label>
+                    <label><input type="radio" name="q2" value="c">Switch statement</label>
+                    <label><input type="radio" name="q2" value="d">If-then-else statement</label>
+                </div>
+                <span id="errorQ2" class="error"></span>
+            </div>
+            
+            <div class="question">
+                <p>3. In JavaScript, what is a block of statement?</p>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="a"> Conditional block</label>
+                    <label><input type="radio" name="q3" value="b"> block that contains a single statement</label>
+                    <label><input type="radio" name="q3" value="c"> both conditional block and a single statement</label>
+                    <label><input type="radio" name="q3" value="d"> block that combines a number of statements into a single compound statement</label>
+                </div>
+                <span id="errorQ3" class="error"></span>
+            </div>
+            
+            <div class="question">
+                <p>4. Which language is primarily used for web development?</p>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="a"> Python</label>
+                    <label><input type="radio" name="q4" value="b"> Java</label>
+                    <label><input type="radio" name="q4" value="c"> HTML</label>
+                    <label><input type="radio" name="q4" value="d"> C++</label>
+                </div>
+                <span id="errorQ4" class="error"></span>
+            </div>
+            
+            <div class="question">
+                <p>5. The "function" and " var" are known as:</p>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="a"> Keywords</label>
+                    <label><input type="radio" name="q5" value="b"> Data types</label>
+                    <label><input type="radio" name="q5" value="c"> Declaration statements</label>
+                    <label><input type="radio" name="q5" value="d"> Prototypes</label>
+                </div>
+                <span id="errorQ5" class="error"></span>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+       
+    </div>
+
+<script>
+    function calculateScore(){
+        const correctAnswers = {
+            q1: "a",
+                q2: "d",
+                q3: "b",
+                q4: "c",
+                q5: "c"
+        };
+        let score = 0;
+        let isValid=true;
+
+        for(let i=1;i<=5;i++){
+            document.getElementById("errorQ" + i).textContent="";
+        }
+        for (let question in correctAnswers){
+            answer=document.querySelector(`input[name="${question}"]:checked`)
+        if(answer){
+            if(answer.value === correctAnswers[question]){
+                score++;
+            }
+        } else{
+            document.getElementById("error"+question.toUpperCase()).textContent="Please Select an Answer";
+            isValid=false;
+        }
+        }
+
+        if (!isValid) return false;
+
+        const resultdiv = document.getElementById("result");
+        resultdiv.style.display='block';
+        resultdiv.textContent=`Your Score is ${score}/5`;
+        window.scrollTo(0,0);
+        return false;
+    }
+</script>
+</body>
+</html>
