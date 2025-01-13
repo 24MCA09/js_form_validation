@@ -1,0 +1,93 @@
+<html>
+
+<body>
+    
+    <h1>Gocery store management</h1>
+<form id="bookingForm">
+    <label>Product ID</label>
+    <input type="text" id="n1"><br>
+    <span id="n1error"></span>
+    <br>
+    <label >Product Name</label>
+    <input type="text" id="n2"><br>
+    <span id="n2error"></span>
+    <br>
+    <label >Brand</label>
+    <input type="text" id="n3"><br>
+    <span id="n3error"></span>
+    <br>
+    <label >Category</label>
+    <input type="text" id="n4"><br>
+    <span id="n4error"></span>
+    <br>
+    <label >Price</label>
+    <input type="text" id="n5"><br>
+    <span id="n5error"></span>
+    <br>
+    <input type="submit" id="submit">
+</form>
+
+<div id="output"></div>
+
+<script>
+
+function ValidateForm(){
+    let isValid = true;
+    const a = document.getElementById('n1').value;
+    const b = document.getElementById('n2').value;
+    const c = document.getElementById('n3').value;
+    const d = document.getElementById('n4').value;
+    const e = document.getElementById('n5').value;
+
+    if(!a){
+        document.getElementById('n1error').innerHTML = "Product ID is Required";
+        isValid=false;
+    }
+    if(!b){
+        document.getElementById('n2error').innerHTML = "Product Name is required";
+        isValid=false;
+    }
+    if(!c){
+        document.getElementById('n3error').innerHTML = "Brand is Required";
+        isValid=false;
+    }
+    if(!d){
+        document.getElementById('n4error').innerHTML = "Category is required";
+        isValid=false;
+    }
+    if(!e){
+        document.getElementById('n5error').innerHTML = "Price is required";
+        isValid=false;
+    }
+    return isValid;
+} 
+
+function displayData(event){
+event.preventDefault();
+
+if(ValidateForm()){
+    const a = document.getElementById('n1').value;
+    const b = document.getElementById('n2').value;
+    const c = document.getElementById('n3').value;
+    const d = document.getElementById('n4').value;
+    const e = document.getElementById('n5').value;
+
+    const outputdiv = document.getElementById('output');
+    outputdiv.innerHTML = `
+    <h3>Product Details</h3>
+    <p><strong>Product ID</strong>${a}</p>
+    <p><strong>Product Name</strong>${b}</p>
+    <p><strong>Brand</strong>${c}</p>
+    <p><strong>Category</strong>${d}</p>
+    <p><strong>Price</strong>${e}</p>
+    `
+}
+}
+
+
+
+document.getElementById('bookingForm').addEventListener("submit",displayData);
+</script>
+
+</body>
+</html>
