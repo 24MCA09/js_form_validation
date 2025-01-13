@@ -1,0 +1,126 @@
+<html>
+<head>
+    <title>Monthly Calendar Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            text-align: center;
+        }
+        .day, .date {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .day {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        .date {
+            background-color: #fff;
+        }
+        .date.empty {
+            background-color: #f9f9f9;
+            border: none;
+        }
+        .controls {
+            margin-bottom: 20px;
+        }
+        .controls input {
+            margin-right: 10px;
+            padding: 10px;
+            font-size: 15px;
+        }
+        #calendarContainer{
+            border: 5px solid black;
+            padding: 5px;
+        }
+        .gbtn{
+            padding: 10px;
+            font-size: 20px;
+            background-color: white;
+            outline: none;
+            border: none;
+        }
+        .gbtn:hover{
+            background-color: green;
+            color: white;
+            border: 1px solid black;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Monthly Calendar Generator</h1>
+    <div class="controls">
+        <label for="year">Year:</label>
+        <input type="number" id="year" placeholder="e.g., 2024">
+        <label for="month">Month:</label>
+        <input type="number" id="month" placeholder="1-12">
+        <button onclick="generateCalendar()" class="gbtn">Generate Calendar</button>
+    </div>
+  <div style="display: flex;gap: 50px;">
+        <h2 id="show-month"></h2>
+        <h2 id="show-year"></h2>
+  </div>
+    <div id="calendarContainer"></div>
+
+    <script>
+        function generateCalendar() {
+            const months=["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+            const year = parseInt(document.getElementById("year").value);
+            const month = parseInt(document.getElementById("month").value) - 1; 
+            
+            getusermonth=months[month]
+            document.getElementById('show-month').innerHTML = getusermonth;
+            document.getElementById('show-year').innerHTML = year;
+
+            if (isNaN(year) || isNaN(month) || month < 0 || month > 11) {
+                alert("Please enter a valid year and month!");
+                return;
+            }
+
+            const calendarContainer = document.getElementById("calendarContainer");
+            calendarContainer.innerHTML = ""; // Clear any existing calendar
+
+            const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+            const firstDay = new Date(year, month, 1).getDay();
+            const lastDate = new Date(year, month + 1, 0).getDate();
+
+            // Create grid for the calendar
+            const calendarGrid = document.createElement("div");
+            calendarGrid.className = "calendar";
+
+            // Add days of the week
+            daysOfWeek.forEach(day => {
+                const dayElement = document.createElement("div");
+                dayElement.className = "day";
+                dayElement.textContent = day;
+                calendarGrid.appendChild(dayElement);
+            });
+
+            // Add empty cells for days before the 1st
+            for (let i = 0; i < firstDay; i++) {
+                const emptyCell = document.createElement("div");
+                emptyCell.className = "date empty";
+                calendarGrid.appendChild(emptyCell);
+            }
+
+            // Add dates of the month
+            for (let date = 1; date <= lastDate; date++) {
+                const dateCell = document.createElement("div");
+                dateCell.className = "date";
+                dateCell.textContent = date;
+                calendarGrid.appendChild(dateCell);
+            }
+
+            // Add calendar to the container
+            calendarContainer.appendChild(calendarGrid);
+        }
+    </script>
+</body>
+</html>
