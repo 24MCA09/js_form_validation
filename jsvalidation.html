@@ -1,0 +1,42 @@
+<html>
+    <head>
+    </head>
+    <body>
+    <form onsubmit="return data()" method="post" >
+    Email:   <br> <input type="email" id="email" name="email"><br>
+    Phone:    <br><input type="number" id="phone" name="phone"><br>
+    Password:   <br> <input type="password" id="pass" name="pass"><br>
+    Confirm password:   <br> <input type="password" id="conpass" name="conpass"><br><br>
+        <input type="submit" name="submit">
+    </form>
+    <script>
+        function data()
+        {
+            var a=document.getElementById("email").value;
+            var b=document.getElementById("phone").value;
+            var c=document.getElementById("pass").value;
+            var d=document.getElementById("conpass").value;
+            if(a==""||b==""||c==""||d=="")
+            {
+                alert("Cannot be empty");
+                return false;   
+            }   
+            else if(b.length>10||b.length<10)
+            {
+                alert("bruh!!");
+                return false;   
+            }
+            else if(c!=d)
+            {
+                alert("seriously bro");
+                return false;   
+            }
+            else
+            {
+                true;
+            }
+        }
+        </script> 
+    </table>
+    </body>
+</html>
